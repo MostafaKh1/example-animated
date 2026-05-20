@@ -7,22 +7,31 @@ export const useNavbarScroll = (
 ) => {
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    let lastScroll = 0;
 
     ScrollTrigger.create({
       start: 0,
       end: "max",
-
       onUpdate: (self) => {
         const currentScroll = self.scroll();
+        const goingDown = self.direction === 1;
 
-        gsap.to(navRef.current, {
-          y: currentScroll > lastScroll ? -100 : 0,
-          autoAlpha: currentScroll > lastScroll ? 0 : 1,
-          duration: 0.3,
-        });
-
-        lastScroll = currentScroll;
+        if (currentScroll < 50) {
+          gsap.to(navRef.current, {
+            y: 0,
+            autoAlpha: 1,
+            duration: 1,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        } else {
+          gsap.to(navRef.current, {
+            y: goingDown ? -100 : 0,
+            autoAlpha: goingDown ? 0 : 1,
+            duration: 1,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        }
       },
     });
   });

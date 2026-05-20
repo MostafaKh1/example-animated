@@ -14,29 +14,63 @@ export const useSectionAnimation = (
         const elements =
             sectionRef.current.querySelectorAll("h5, p, span");
 
-        gsap.utils.toArray(elements).forEach((el: any, i, arr) => {
-            const element = new SplitText(el, { type: "words" });
-            const batchSize = 2;
-            const batchIndex = Math.floor(i / batchSize);
-            const lastElment = arr[arr.length - 1]
-            gsap.from(element.words, {
-                opacity: 0, y: 15,
-                stagger: 0.06, duration: 0.5,
+        const navLinks = document.querySelectorAll(".nav-links");
+
+        elements.forEach((el: any) => {
+            const split = new SplitText(el, { type: "words" });
+
+            gsap.from(split.words, {
+                opacity: 0,
+                y: 15,
+                stagger: 0.05,
+                duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
-                    trigger: arr[batchIndex * batchSize] as any,
+                    trigger: el,
                     start: "top 85%",
+                    toggleActions: "play none none none",
                 },
             });
+        });
 
-            gsap.to(sectionRef.current, {
-                backgroundColor: "#171717",
-                scrollTrigger: {
-                    trigger: lastElment as HTMLElement,
-                    start: "top 70%",
-                    toggleActions: 'play none none reverse'
-                },
-            })
+      
+        const lastElement = elements[elements.length - 1];
+
+        gsap.to(sectionRef.current, {
+            backgroundColor: "#171717",
+            ease: "none",
+            scrollTrigger: {
+                trigger: lastElement,
+                start: "top 70%",
+                toggleActions: "play none none reverse",
+            },
+        });
+
+     
+        ScrollTrigger.create({
+            trigger: lastElement,
+            start: "top 60%",
+            end: "bottom 60%",
+
+            onEnter: () => {
+                gsap.to(navLinks, {
+                    color: "#E5E7EB",
+                    duration: 0.4,
+                    ease: "power2.out",
+                    overwrite: "auto",
+                    toggleActions: "play none none reverse",
+
+                });
+            },
+
+            onLeaveBack: () => {
+                gsap.to(navLinks, {
+                    color: "#FDA51F",
+                    duration: 0.4,
+                    ease: "power2.out",
+                    overwrite: "auto",
+                });
+            },
         });
     }, []);
 };

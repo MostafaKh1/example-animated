@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useRef } from "react";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { useSectionAnimation } from "@/hooks/useTextDisplay";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import Preloader from "@/components/animation/Preloader";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -32,34 +32,39 @@ export default function Home() {
 
   return (
     <div>
+      <Preloader />
+      {/* Top Navigation Bar */}
+      <div className="fixed top-0 z-50 w-full h-24" ref={navRef as any}>
+        {/* Navigation Links */}
+        <nav className="  py-12 flex items-center " >
+          <ul className="flex justify-between px-24 font-medium w-full list-none">
+            {["ABOUT", "WORK", "FOREST", "UPDATE", "CONTACT"].map((item) => {
+              const MiddleItem = item === "FOREST";
+              return <li key={item} className="relative group">
+                <a
+
+                  href={`#${item.toLowerCase()}`}
+                  className={` nav-links  text-[#FDA51F]    tracking-[0.2em] transition-colors duration-300 uppercase py-2 block ${MiddleItem ? "font-bold text-4xl" : "text-[10px]"
+                    }`}
+                >
+                  {item}
+                </a>
+              </li>
+            })}
+          </ul>
+        </nav>
+      </div>
+
       <section ref={heroRef}>
         <header
           className="relative w-full h-screen flex flex-col  text-white overflow-hidden font-sans bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero.png')" }}
+          style={{ backgroundImage: "url('/hero.webp')" }}
         >
           {/* Dark gradient overlay inside header */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 z-0" />
           <div className="absolute inset-0 bg-radial-vignette z-0 pointer-events-none" />
 
-          {/* Top Navigation Bar */}
-          <div className="fixed top-0 z-50 w-full h-24">
-            {/* Navigation Links */}
-            <nav className=" py-12 flex items-center " ref={navRef}>
-              <ul className="flex justify-evenly w-full list-none">
-                {["ABOUT", "WORK", "FOREST", "UPDATE", "CONTACT"].map((item) => (
-                  <li key={item} className="relative group">
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      className={`text-xs text-[#FDA51F] tracking-[0.2em] transition-colors duration-300 uppercase py-2 block ${item === "FOREST" ? "font-bold text-lg" : "font-medium"
-                        }`}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+
 
           {/* Centered Hero Content */}
           <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 text-center">
@@ -86,12 +91,7 @@ export default function Home() {
           </div>
 
           {/* Bottom Scroll Indicator */}
-          <div className="relative z-10 pb-8 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 cursor-pointer">
-            <span className="text-[9px] font-bold tracking-[0.3em] uppercase">Scroll to Discover</span>
-            <div className="w-[18px] h-[30px] rounded-full border border-white/30 flex justify-center p-1">
-              <div className="w-[3px] h-[6px] rounded-full bg-white/70 animate-bounce" />
-            </div>
-          </div>
+
         </header>
       </section>
       <main className="bg-noise">

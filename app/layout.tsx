@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css"
+import SmoothScrolling from "@/components/animation/SmoothScrolling";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} h-full antialiased `}>
-      <body className="min-h-full font-sans">{children}</body>
+      <body className="min-h-full font-sans">
+        <SmoothScrolling>{children}</SmoothScrolling>
+      </body>
     </html>
   );
 }
