@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 const ArrowIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -289,13 +288,13 @@ export default function ProjectsSection() {
           <li
             style={{ zIndex: index + 2 }}
             key={project.title}
-            className={`project-item relative bg-black grid h-screen  grid-cols-12 md:flex-row group overflow-hidden py-4 px-8 ${index === projects.length - 1 ? "h-screen" : ""
-              }`}          >
+            className={`project-item relative bg-black flex flex-col md:flex-row h-screen group overflow-hidden py-4 px-8 ${index === projects.length - 1 ? "h-screen" : ""}`}
+          >
 
-            <article className="relative z-10   flex flex-col h-screen gap-20 col-span-6  px-8 md:px-12 py-10 md:py-12  transition-colors duration-500">
+            <article className="relative z-10 flex flex-col  justify-start   w-full md:w-1/2 h-full  md:gap-8 px-4 md:px-12 py-4 md:py-12 transition-colors duration-500">
 
 
-              <h3 className="anim-text anim-fade text-4xl sm:text-6xl lg:text-6xl font-serif text-white">
+              <h3 className="anim-text anim-fade  text-4xl sm:text-6xl lg:text-6xl font-serif text-white">
                 {project.title}
               </h3>
 
@@ -307,7 +306,7 @@ export default function ProjectsSection() {
 
 
                 <div className="flex flex-col  w-full sm:w-2/3">
-                  <div className="flex flex-col max-w-[333px] gap-20">
+                  <div className="flex flex-col max-w-full md:max-w-[333px] gap-4 md:gap-20">
                     <p className="anim-text anim-fade font-bold text-xs tracking-[0.2em] text-white/80 uppercase">
                       CLIENT: {project.client}
                     </p>
@@ -336,14 +335,14 @@ export default function ProjectsSection() {
             </article>
 
 
-            <div className="relative   aspect-video md:aspect-auto col-span-6  h-screen  pb-12">
+            <div className="relative w-full md:w-1/2 h-full pb-12 flex items-center justify-center">
               <video
                 autoPlay
                 playsInline
                 muted
                 loop
                 preload="metadata"
-                className={`w-full h-full object-cover transition-transform duration-700  ${project.centered ? "object-center" : "object-cover"}`}
+                className="w-full h-full object-cover transition-transform duration-700"
               >
                 {project.videoSources.map((s) => (
                   <source key={s.src} src={s.src} type={s.type} />

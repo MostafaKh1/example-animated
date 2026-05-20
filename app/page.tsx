@@ -74,13 +74,11 @@ export default function Home() {
               FOREST LIVING EXPERIENCE
             </span> */}
 
-              {/* Heading */}
               <h1 className="text-3xl sm:text-6xl md:text-4xl font-extralight tracking-tight leading-none uppercase mb-8">
                 The Silent Echo <br />
                 <span className="font-semibold text-white">of the Forest</span>
               </h1>
 
-              {/* Subtitle */}
               <p className="text-sm sm:text-base md:text-md  text-white/60 font-light leading-relaxed max-w-xl mb-12">
                 Step into an immersive architectural consciousness study where motion, code, and nature converge to form healing spaces and activate the senses.
               </p>
@@ -98,11 +96,11 @@ export default function Home() {
         <section ref={sectionRef} className="relative z-10 bg-[#38493A] min-h-screen bg-noise">
           <div className="text-center flex flex-col gap-4 justify-center items-center mx-auto pt-24 text-[#FDA51F]">
             <h5 className="text-sm">FOREST</h5>
-            <p className="uppercase font-semibold tracking-widest  md:text-5xl max-w-[900px] lg:text-7xl lg:max-w-[1200px]">A sanctuary where the rhythms of code and nature breathe life into space.</p>
+            <p className="uppercase font-semibold tracking-widest  text-4xl lg:text-7xl lg:max-w-[1200px]">A sanctuary where the rhythms of code and nature breathe life into space.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 w-full mt-24 pt-6 px-8 pb-32">
-            <div />
-            <div className="flex flex-col gap-6 text-white/80 text-lg sm:text-xl font-light leading-relaxed pr-8 md:pr-16">
+          <div className="flex w-full mt-24 pt-6 px-8 pb-32">
+            <div className=" min-w-1/5 lg:min-w-1/2" />
+            <div className="flex flex-col flex-1 gap-6 text-white/80 text-lg sm:text-xl font-light leading-relaxed pr-8 md:pr-16">
               {[
                 "Merlin — a Code Boutique from Amsterdam. Founded in 2018 to prove what’s possible.",
                 "We exist to redefine what “good” means by raising the bar through the work itself.",
