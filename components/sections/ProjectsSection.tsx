@@ -174,7 +174,6 @@ export default function ProjectsSection() {
     items.forEach((item) => {
 
       const fadeEls = item.querySelectorAll(".anim-fade");
-      const video = item.querySelector("video");
 
       gsap.from(fadeEls, {
         opacity: 0,
@@ -236,13 +235,11 @@ export default function ProjectsSection() {
       const textEls = item.querySelectorAll(".anim-text");
       const borderEls = item.querySelectorAll(".anim-border");
       const animExploer = item.querySelector(".anim-exploer")
-      const animline = item.querySelectorAll(".anim-line")
 
       animExploer?.addEventListener("mouseenter", () => {
         gsap.to(item, { backgroundColor: "#FDA51F", duration: 0.5, overwrite: "auto" });
-        gsap.to(textEls, { color: "#111111", duration: 0.5, overwrite: "auto" });
         gsap.to(borderEls, { borderColor: "#111111", duration: 0.5, overwrite: "auto" });
-        gsap.to(animline, { x: "0%", duration: 0.5, overwrite: "auto" })
+        gsap.to(textEls, { color: "#111111", duration: 0.5, overwrite: "auto" });
       });
 
       animExploer?.addEventListener("mouseleave", () => {
@@ -263,7 +260,6 @@ export default function ProjectsSection() {
           duration: 0.25,
           overwrite: "auto",
         });
-        gsap.to(animline, { x: "0%", duration: 0.5, overwrite: "auto" })
       });
     });
   }, []);
@@ -312,22 +308,22 @@ export default function ProjectsSection() {
 
                 {/* Right content */}
                 <div className="flex flex-col  w-full sm:w-2/3">
-                  <div className="flex flex-col gap-20">
-                    <p className="anim-text anim-fade text-[10px] tracking-[0.2em] text-white/80 uppercase font-bold">
+                  <div className="flex flex-col max-w-[333px] gap-20">
+                    <p className="anim-text anim-fade font-bold text-xs tracking-[0.2em] text-white/80 uppercase">
                       CLIENT: {project.client}
                     </p>
-                    <p className="anim-text anim-fade text-xl italic leading-relaxed font-serif text-white/90">
+                    <p className="anim-text anim-fade text-sm font-medium max-w-[333px] italic leading-relaxed font-serif text-white/90">
                       {project.description}
                     </p>
                     <div className="w-full">
                       <a
                         href={project.href}
-                        className=" anim-exploer anim-fade  group/btn anim-border flex items-center justify-between w-full pb-4 border-b border-white hover:border-white/50 transition-colors"
+                        className=" anim-exploer anim-fade  group/btn anim-border flex items-center justify-between w-full pb-4 border-b border-white  "
                       >
                         <span className="anim-text  text-[11px] tracking-[0.15em] uppercase font-bold text-white">
                           Explore case study
                         </span>
-                        <span className="anim-text anim-line text-white transition-transform duration-300 ">
+                        <span className="anim-text text-white  ">
                           <ArrowIcon />
                         </span>
                       </a>

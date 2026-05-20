@@ -53,36 +53,3 @@ html {
 
 
 
-/* .sticky_menu_set.onTop .sticky_menu {
-  background: transparent;
-  border-top: 1px solid transparent;
-}
-
-.sticky_menu.active {
-  color: #171717;
-}
-
-.sticky_menu.notInView {
-  transform: translateY(-100%);
-  transition: transform 0.35s ease;
-}
-
-.sticky_menu_set {
-  position: relative;
-  z-index: 50;
-}
-
-.full_bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-._parallax {
-  will-change: transform;
-}
-
-.bg-radial-vignette {
-  background: radial-gradient(circle, transparent 30%, rgba(10, 10, 10, 0.7) 90%);
-} */
