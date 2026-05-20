@@ -1,13 +1,32 @@
+// src/components/animation/SmoothScrolling.tsx
 "use client";
 
-import { ReactLenis } from '@studio-freight/react-lenis';
+import { useEffect, useRef } from "react";
+import Lenis from "lenis";
 
-function SmoothScrolling({ children }: { children: React.ReactNode }) {
-  return (
-    <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}>
-      {children as any}
-    </ReactLenis>
-  );
+export default function SmoothScrolling({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    // Initialise Lenis
+    lenisRef.current = new Lenis({
+      lerp: 0.08,          // smoothness
+      duration: 1.2,       // wheel inertia
+      smoothWheel: true,
+    });
+
+    // Animation loop for Lenis
+    const raf = (time: number) => {
+      lenisRef.current?.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
+    };
+    rafRef.current = requestAnimationFrame(raf);
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return <>{children}</>;
 }
-
-export default SmoothScrolling;
