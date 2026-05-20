@@ -1,64 +1,127 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useRef } from "react";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
+import { useSectionAnimation } from "@/hooks/useTextDisplay";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function Home() {
+  const navRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLHeadElement>(null);
+
+  useNavbarScroll(navRef);
+  useSectionAnimation(sectionRef)
+
+  useGSAP(() => {
+    if (!heroRef.current) return;
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.create({
+      trigger: heroRef.current,
+      start: "top top",
+      end: "bottom top",
+      pin: true,
+      pinSpacing: false,
+    });
+  }, []);
+
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div>
+      <section ref={heroRef}>
+        <header
+          className="relative w-full h-screen flex flex-col  text-white overflow-hidden font-sans bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero.png')" }}
+        >
+          {/* Dark gradient overlay inside header */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 z-0" />
+          <div className="absolute inset-0 bg-radial-vignette z-0 pointer-events-none" />
+
+          {/* Top Navigation Bar */}
+          <div className="fixed top-0 z-50 w-full h-24">
+            {/* Navigation Links */}
+            <nav className=" py-12 flex items-center " ref={navRef}>
+              <ul className="flex justify-evenly w-full list-none">
+                {["ABOUT", "WORK", "FOREST", "UPDATE", "CONTACT"].map((item) => (
+                  <li key={item} className="relative group">
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className={`text-xs text-[#FDA51F] tracking-[0.2em] transition-colors duration-300 uppercase py-2 block ${item === "FOREST" ? "font-bold text-lg" : "font-medium"
+                        }`}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Centered Hero Content */}
+          <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 text-center">
+            <div className="max-w-4xl flex flex-col items-center">
+              {/* Tagline */}
+              {/* <span className="text-xs font-bold tracking-[0.4em] text-[#FDA51F] uppercase mb-6 bg-[#a52c45]/10 border border-[#FDA51F]/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+              FOREST LIVING EXPERIENCE
+            </span> */}
+
+              {/* Heading */}
+              <h1 className="text-3xl sm:text-6xl md:text-4xl font-extralight tracking-tight leading-none uppercase mb-8">
+                The Silent Echo <br />
+                <span className="font-semibold text-white">of the Forest</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base md:text-md  text-white/60 font-light leading-relaxed max-w-xl mb-12">
+                Step into an immersive architectural consciousness study where motion, code, and nature converge to form healing spaces and activate the senses.
+              </p>
+
+              {/* Call to Actions */}
+
+            </div>
+          </div>
+
+          {/* Bottom Scroll Indicator */}
+          <div className="relative z-10 pb-8 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 cursor-pointer">
+            <span className="text-[9px] font-bold tracking-[0.3em] uppercase">Scroll to Discover</span>
+            <div className="w-[18px] h-[30px] rounded-full border border-white/30 flex justify-center p-1">
+              <div className="w-[3px] h-[6px] rounded-full bg-white/70 animate-bounce" />
+            </div>
+          </div>
+        </header>
+      </section>
+      <main className="bg-noise">
+        <section ref={sectionRef} className="relative z-10 bg-[#38493A] min-h-screen bg-noise">
+          <div className="text-center flex flex-col gap-4 justify-center items-center mx-auto pt-24 text-[#FDA51F]">
+            <h5 className="text-sm">FOREST</h5>
+            <p className="uppercase font-semibold tracking-widest  md:text-5xl max-w-[900px] lg:text-7xl lg:max-w-[1200px]">A sanctuary where the rhythms of code and nature breathe life into space.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 w-full mt-24 pt-6 px-8 pb-32">
+            <div />
+            <div className="flex flex-col gap-6 text-white/80 text-lg sm:text-xl font-light leading-relaxed pr-8 md:pr-16">
+              {[
+                "Merlin — a Code Boutique from Amsterdam. Founded in 2018 to prove what’s possible.",
+                "We exist to redefine what “good” means by raising the bar through the work itself.",
+                "We work with extraordinary brands and creative teams who refuse to settle. Those who see digital as identity and long-term advantage.",
+                "At our core is deep, multidisciplinary craft. We bring motion-first design and code together as one practice, shaped by specialists who care deeply about every decision.",
+                "Merlin helps you maximize your digital potential, transforming design, technology, and motion into expressive, reliable, and future-ready experiences.",
+                "We prove what’s possible through care, courage, and relentless craft.",
+                "Imagine. Code. Magic.",
+              ].map((line, i) => (
+                <span key={i} className="text-[#FDA51F]  font-medium  max-w-[650px]">
+                  {line}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ProjectsSection />
+
       </main>
     </div>
   );
