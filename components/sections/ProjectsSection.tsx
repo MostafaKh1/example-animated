@@ -316,7 +316,7 @@ export default function ProjectsSection() {
                     </p>
                     <div className="w-full">
                       <a
-                        href={project.href}
+                        href='#'
                         className=" anim-exploer anim-fade  group/btn anim-border flex items-center justify-between w-full pb-4 border-b border-white  "
                       >
                         <span className="anim-text  text-[11px] tracking-[0.15em] uppercase font-bold text-white">
