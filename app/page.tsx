@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import Preloader from "@/components/animation/Preloader";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { MobileMenu } from "@/components/Mobile-menu";
 
 export default function Home() {
   const navRef = useRef<HTMLElement>(null);
@@ -36,23 +37,29 @@ export default function Home() {
       {/* Top Navigation Bar */}
       <div className="fixed top-0 z-50 w-full h-24" ref={navRef as any}>
         {/* Navigation Links */}
-        <nav className="  py-12 flex items-center " >
-          <ul className="flex justify-between px-24 font-medium w-full list-none">
-            {["ABOUT", "WORK", "FOREST", "UPDATE", "CONTACT"].map((item) => {
-              const MiddleItem = item === "FOREST";
-              return <li key={item} className="relative group">
-                <a
+        <div className="hidden md:block">
+          <nav className="  py-12 flex items-center " >
+            <ul className="flex justify-between px-24 font-medium w-full list-none">
+              {["ABOUT", "WORK", "FOREST", "UPDATE", "CONTACT"].map((item) => {
+                const MiddleItem = item === "FOREST";
+                return <li key={item} className="relative group">
+                  <a
 
-                  href={`#${item.toLowerCase()}`}
-                  className={` nav-links  text-[#FDA51F]    tracking-[0.2em] transition-colors duration-300 uppercase py-2 block ${MiddleItem ? "font-bold text-4xl" : "text-[10px]"
-                    }`}
-                >
-                  {item}
-                </a>
-              </li>
-            })}
-          </ul>
-        </nav>
+                    href={`#${item.toLowerCase()}`}
+                    className={` nav-links  text-[#FDA51F]    tracking-[0.2em] transition-colors duration-300 uppercase py-2 block ${MiddleItem ? "font-bold text-4xl" : "text-[10px]"
+                      }`}
+                  >
+                    {item}
+                  </a>
+                </li>
+              })}
+            </ul>
+          </nav>
+        </div>
+        <div className="block md:hidden">
+          <MobileMenu />
+        </div>
+
       </div>
 
       <section ref={heroRef}>

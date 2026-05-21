@@ -4,8 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const useNavbarScroll = (
   navRef: RefObject<HTMLElement | null>
+  
 ) => {
   useGSAP(() => {
+
+
+
     gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.create({
