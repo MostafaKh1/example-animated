@@ -75,7 +75,7 @@ export const MobileMenu = () => {
 
     return (
         <nav className="flex justify-between items-center  text-[#FDA51F]">
-            <h1 className="   font-bold mobile-title text-7xl relative top-[-10] z-[60]">
+            <h1 className="   font-bold mobile-title text-5xl top-[-8] md:text-7xl relative md:top-[-10] z-[60]">
                 The Forest
             </h1>
 
