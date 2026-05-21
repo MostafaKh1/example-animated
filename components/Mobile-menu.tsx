@@ -37,7 +37,7 @@ export const MobileMenu = () => {
 
                 tl.to(mobileNav, {
                     height: "100dvh",
-                    duration: 0.8,
+                    duration: 0.3,
                     ease: "power2.out",
                 });
 
