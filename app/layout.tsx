@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Madinet Masr — GSAP learning clone",
+  title: " The Silent Echo of the Forest — GSAP learning clone",
   description:
     "Homepage motion study: hero parallax, scroll reveals, sticky nav, marquee",
 };
